@@ -1,6 +1,6 @@
 html {
   font-size: 10px;
-  background:url(http://0.0.0.0:8000/images/pantydogs.jpg) bottom center;
+  background:url(images/bg.gif) bottom center;
   background-size: cover;
 }
 body,html {
@@ -23,7 +23,7 @@ body,html {
   margin:1rem;
   font-size: 1.5rem;
   padding:1rem .5rem;
-  transition:all .07s;
+  transition:all .57s;
   width:100px;
   text-align: center;
   color:white;
@@ -32,7 +32,7 @@ body,html {
 }
 
 .playing {
-  transform:scale(1.1);
+  transform:scale(1.1) rotate(90deg) scaleY(5);
   border-color:#ffc600;
   box-shadow: 0 0 10px #ffc600;
 }

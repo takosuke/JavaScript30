@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>JS Drum Kit</title>
+  <title>Arnie's conversation guide</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,73 +11,73 @@
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
-      <span class="sound">clap</span>
+      <span class="sound">hello cutie pie</span>
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
-      <span class="sound">hihat</span>
+      <span class="sound">nice to meet you</span>
     </div>
     <div data-key="68" class="key">
       <kbd>D</kbd>
-      <span class="sound">kick</span>
+      <span class="sound">who are you?</span>
     </div>
     <div data-key="70" class="key">
       <kbd>F</kbd>
-      <span class="sound">openhat</span>
+      <span class="sound">what do you want?</span>
     </div>
     <div data-key="71" class="key">
       <kbd>G</kbd>
-      <span class="sound">boom</span>
+      <span class="sound">what's the matter?</span>
     </div>
     <div data-key="72" class="key">
       <kbd>H</kbd>
-      <span class="sound">ride</span>
+      <span class="sound">Fuck you asshore</span>
     </div>
     <div data-key="74" class="key">
       <kbd>J</kbd>
-      <span class="sound">snare</span>
+      <span class="sound">no problemo</span>
     </div>
     <div data-key="75" class="key">
       <kbd>K</kbd>
-      <span class="sound">tom</span>
+      <span class="sound">good bye</span>
     </div>
     <div data-key="76" class="key">
       <kbd>L</kbd>
-      <span class="sound">tink</span>
+      <span class="sound">I'll be back</span>
     </div>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
-  <audio data-key="76" src="sounds/tink.wav"></audio>
+  <audio data-key="65" src="sounds/hello_cutie.wav"></audio>
+  <audio data-key="83" src="sounds/nice_2_meet_u.wav"></audio>
+  <audio data-key="68" src="sounds/who_are_you.wav"></audio>
+  <audio data-key="70" src="sounds/what_want.wav"></audio>
+  <audio data-key="71" src="sounds/whats_the_matter.wav"></audio>
+  <audio data-key="72" src="sounds/t1_fu.wav"></audio>
+  <audio data-key="74" src="sounds/t2_no_problemo.wav"></audio>
+  <audio data-key="75" src="sounds/t2_goodbye.wav"></audio>
+  <audio data-key="76" src="sounds/t1_be_back.wav"></audio>
 
 <script>
+  window.addEventListener('keydown', playSound);
 
-
-  function playSound(e) {
+  function playSound(e){
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    if (!audio) return;
     const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    if (!audio) return; // stop the function from running all together
-    audio.currentTime = 0; // rewind to the start
+    audio.currentTime = 0;
     audio.play();
     key.classList.add('playing');
   }
-  function removeTransition(e) {
-    if (e.propertyName !== 'transform') return; // skip it if it's not a transform
-    this.classList.remove('playing');
-  }
 
   const keys = document.querySelectorAll('.key');
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
+  keys.forEach( key => key.addEventListener('transitionend', removeTransition) );
 
+  function removeTransition(e){
+    if (e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
 </script>
+
 
 </body>
 </html>

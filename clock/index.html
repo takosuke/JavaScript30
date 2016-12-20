@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+    <audio class="tick" src="sounds/tick.wav"></audio>
+    <audio class="tock" src="sounds/tock.wav"></audio>
+
+
+  <style>
+    html {
+      background:#abf1bc;
+      background-size:cover;
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      background: url('images/face.png');
+      width: 400px;
+      height: 400px;
+      margin:50px auto;
+      position: relative;
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-8px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width:50%;
+      height:50px;
+      background:url('images/clockhand1.png');
+      position: absolute;
+      top:50%;
+      transform-origin: 100%;
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(0.1, 2.8, 0.5, 1);
+      
+    }
+
+  </style>
+
+  <script>
+  (function (){
+    const secondHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    function getTransitionTime(time){
+      const transitionTime = time === 0 ? 0 : 0.05;
+      return transitionTime
+    }
+
+    function setDate(){
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours();
+      const secondsDegrees = (seconds/ 60) * 360 + 90;
+      const minutesDegrees = (minutes/ 60) * 360 + 90;
+      const hoursDegrees = (hours/12) * 360 + 90;
+      const tick = document.querySelector('.tick');
+      const tock = document.querySelector('.tock');
+      seconds % 2 === 0 ? tick.play() : tock.play();
+      secondHand.style.transition = `all ${getTransitionTime(seconds)}s`;
+      minHand.style.transition = `all ${getTransitionTime(minutes)}s`;
+      hourHand.style.transition = `all ${getTransitionTime(hours)}s`;
+      secondHand.style.transform = `rotate(${secondsDegrees}deg) scaleX(1.5)`; 
+      minHand.style.transform = `rotate(${minutesDegrees}deg)`; 
+      hourHand.style.transform = `rotate(${hoursDegrees}deg) scale(0.7, 1.5)`; 
+    }
+
+     setInterval(setDate, 1000); 
+   })();
+  </script>
+</body>
+</html>

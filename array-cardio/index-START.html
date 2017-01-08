@@ -27,28 +27,46 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const renaissancers = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
+    renaissancers.forEach(renaissancer => console.log(`${renaissancer.first} ${renaissancer.last}`));
+    console.table(renaissancers);
     // Array.prototype.map()
     // 2. Give us an array of the inventory first and last names
+    const names = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    console.log(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sorted_inventors = inventors.sort((a, b) => a.year - b.year);
+    sorted_inventors.forEach(inventor => console.log(`${inventor.first} ${inventor.last} ${inventor.year}`));
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const accumulated_years = inventors.reduce((a, b) => a + (b.passed - b.year), 0);
+    console.log(accumulated_years);
 
     // 5. Sort the inventors by years lived
+    const oldest = inventors.sort((a, b) => { var a_age = a.passed - a.year; var b_age = b.passed - b.year; return b_age - a_age});
+    console.table(oldest);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    const boulevards = ['yada de pee', 'poo', 'boulevard de pee'];
+    const boulevards_de = boulevards.filter(boulevard => boulevard.includes('de'));
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sorted_people = people.sort();
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const transportation = data.reduce((object, item) => {
+      object[item] = object[item] ? object[item]  : 0;
+      object[item] = object[item] + 1;
+      return object
+    }, {});
 
   </script>
 </body>
